@@ -92,6 +92,27 @@ export function ChallengeClient() {
     setIsSubmitting(true);
     setLastResult(null);
 
+    try {
+      // 1. Get the prompt from the form values
+      const userPrompt = values.prompt;
+  
+      // 2. Call your API route to get the AI score
+      const aiResponse = await getAIScore(userPrompt);
+  
+      // 3. (Optional) Update your UI with the result
+      if (aiResponse) {
+        setLastResult(aiResponse);
+        alert(`AI Response: ${aiResponse}`);
+      }
+    } catch (error) {
+      console.error("AI scoring failed:", error);
+      alert("Sorry, there was an error getting a score from the AI.");
+    } finally {
+      // 4. Important: Stop the loading spinner
+      setIsSubmitting(false);
+    }
+  };
+
     const result = await submitPrompt({ 
       prompt: values.prompt,
       userId,
