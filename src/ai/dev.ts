@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/score-prompt.ts';
+import '@/ai/flows/score-prompt';
