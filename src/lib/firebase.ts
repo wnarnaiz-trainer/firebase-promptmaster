@@ -1,3 +1,4 @@
+"use server";
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -6,5 +7,11 @@ import { getFirestore } from "firebase/firestore";
 const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG || '{}');
 
 // Initialize Firebase
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0];
+}
+
 export const db = getFirestore(app);
