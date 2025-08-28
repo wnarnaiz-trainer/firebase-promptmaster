@@ -99,6 +99,7 @@ export function ChallengeClient() {
       scenario: currentChallenge.scenario,
       task: currentChallenge.title,
     });
+
     setIsSubmitting(false);
 
     if (result.success && result.data) {
