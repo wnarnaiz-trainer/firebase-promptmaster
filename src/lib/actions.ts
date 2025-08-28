@@ -17,8 +17,6 @@ export async function submitPrompt(
 ): Promise<{success: boolean; data?: ScorePromptOutput; error?: string}> {
   try {
     const result = await scorePrompt({prompt: data.prompt, scenario: data.scenario, task: data.task});
-    // The updateUserScore was removed when the leaderboard was removed.
-    // await updateUserScore(data.userId, data.screenName, result.overallScore);
     return {success: true, data: result};
   } catch (error) {
     console.error('Error scoring prompt:', error);
