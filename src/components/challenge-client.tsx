@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Dices, User, Loader2, ArrowRight, PartyPopper } from 'lucide-react';
 
-import type { Persona, Challenge, SubmittedPrompt, ScorePromptOutput, LeaderboardEntry } from '@/lib/types';
+import type { Persona, Challenge, SubmittedPrompt, ScorePromptOutput } from '@/lib/types';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { submitPrompt } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
@@ -91,27 +91,6 @@ export function ChallengeClient() {
     if (!currentChallenge || !userId || !screenName) return;
     setIsSubmitting(true);
     setLastResult(null);
-
-    try {
-      // 1. Get the prompt from the form values
-      const userPrompt = values.prompt;
-  
-      // 2. Call your API route to get the AI score
-      const aiResponse = await getAIScore(userPrompt);
-  
-      // 3. (Optional) Update your UI with the result
-      if (aiResponse) {
-        setLastResult(aiResponse);
-        alert(`AI Response: ${aiResponse}`);
-      }
-    } catch (error) {
-      console.error("AI scoring failed:", error);
-      alert("Sorry, there was an error getting a score from the AI.");
-    } finally {
-      // 4. Important: Stop the loading spinner
-      setIsSubmitting(false);
-    }
-  };
 
     const result = await submitPrompt({ 
       prompt: values.prompt,
