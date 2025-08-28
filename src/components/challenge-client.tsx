@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Dices, User, Loader2, ArrowRight, PartyPopper } from 'lucide-react';
 
@@ -92,51 +92,58 @@ export function ChallengeClient() {
     setIsSubmitting(true);
     setLastResult(null);
 
-    const result = await submitPrompt({ 
-      prompt: values.prompt,
-      userId,
-      screenName,
-      scenario: currentChallenge.scenario,
-      task: currentChallenge.title,
-    });
-
-    setIsSubmitting(false);
-
-    if (result.success && result.data) {
-      setLastResult(result.data);
-      const newSubmission: SubmittedPrompt = {
-        personaId: currentChallenge.personaId,
-        challengeId: currentChallenge.challengeId,
+    try {
+      const result = await submitPrompt({ 
         prompt: values.prompt,
-        score: result.data.overallScore, // Score for this specific challenge
-      };
-      
-      const existingSubmissionIndex = submittedPrompts.findIndex(p => p.personaId === newSubmission.personaId && p.challengeId === newSubmission.challengeId);
-      if (existingSubmissionIndex > -1) {
-        const updatedPrompts = [...submittedPrompts];
-        updatedPrompts[existingSubmissionIndex] = newSubmission;
-        setSubmittedPrompts(updatedPrompts);
+        userId,
+        screenName,
+        scenario: currentChallenge.scenario,
+        task: currentChallenge.title,
+      });
+
+      if (result.success && result.data) {
+        setLastResult(result.data);
+        const newSubmission: SubmittedPrompt = {
+          personaId: currentChallenge.personaId,
+          challengeId: currentChallenge.challengeId,
+          prompt: values.prompt,
+          score: result.data.overallScore,
+        };
+        
+        const existingSubmissionIndex = submittedPrompts.findIndex(p => p.personaId === newSubmission.personaId && p.challengeId === newSubmission.challengeId);
+        if (existingSubmissionIndex > -1) {
+          const updatedPrompts = [...submittedPrompts];
+          updatedPrompts[existingSubmissionIndex] = newSubmission;
+          setSubmittedPrompts(updatedPrompts);
+        } else {
+          setSubmittedPrompts([...submittedPrompts, newSubmission]);
+        }
+        
+        toast({
+          title: "Prompt Scored!",
+          description: `You scored ${result.data.overallScore} on this challenge.`,
+        });
       } else {
-        setSubmittedPrompts([...submittedPrompts, newSubmission]);
+        toast({
+          variant: "destructive",
+          title: "Submission Failed",
+          description: result.error || "An unknown error occurred.",
+        });
       }
-      
-      toast({
-        title: "Prompt Scored!",
-        description: `You scored ${result.data.overallScore} on this challenge.`,
-      });
-    } else {
-      toast({
+    } catch (error) {
+       toast({
         variant: "destructive",
-        title: "Submission Failed",
-        description: result.error || "An unknown error occurred.",
+        title: "Error",
+        description: "An unexpected error occurred during submission.",
       });
+    } finally {
+       setIsSubmitting(false);
     }
   };
 
   const navigateToNextChallenge = () => {
     setLastResult(null);
     form.reset();
-    // The useEffect for availableChallenges will handle setting the next one
   };
   
   useEffect(() => {
@@ -149,7 +156,6 @@ export function ChallengeClient() {
   }
   
   const handleLogout = () => {
-    // Clear all user-related data
     localStorage.removeItem("screenName");
     localStorage.removeItem("privacyAgreed");
     localStorage.removeItem("selectedPersona");
