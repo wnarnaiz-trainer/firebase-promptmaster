@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Dices, User, Loader2, ArrowRight, PartyPopper } from 'lucide-react';
 
@@ -33,6 +34,7 @@ export function ChallengeClient() {
   const [userId, setUserId] = useLocalStorage<string>('userId', '');
   const [selectedPersona, setSelectedPersona] = useLocalStorage<Persona | null>('selectedPersona', null);
   const [submittedPrompts, setSubmittedPrompts] = useLocalStorage<SubmittedPrompt[]>('submittedPrompts', []);
+  const [currentChallenge, setCurrentChallenge] = useLocalStorage<Challenge | null>('currentChallenge', null);
   
   const [lastResult, setLastResult] = useState<ScorePromptOutput | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,12 +63,23 @@ export function ChallengeClient() {
     return challenges.filter(c => c.personaId === selectedPersona.id && !completedChallengeIds.has(c.challengeId));
   }, [selectedPersona, submittedPrompts]);
   
-  const currentChallenge = useMemo(() => {
+  const selectNextChallenge = useCallback(() => {
     if (availableChallenges.length > 0) {
-      return availableChallenges[0];
+      const randomIndex = Math.floor(Math.random() * availableChallenges.length);
+      setCurrentChallenge(availableChallenges[randomIndex]);
+    } else {
+      setCurrentChallenge(null);
     }
-    return null;
-  }, [availableChallenges]);
+  }, [availableChallenges, setCurrentChallenge]);
+
+  useEffect(() => {
+    // Select a new challenge only if one isn't already selected for the current persona
+    // or if the selected persona has changed.
+    if (selectedPersona && (!currentChallenge || currentChallenge.personaId !== selectedPersona.id)) {
+      selectNextChallenge();
+    }
+  }, [selectedPersona, currentChallenge, selectNextChallenge]);
+
 
   const userTotalScore = useMemo(() => {
     return submittedPrompts.reduce((total, p) => total + p.score, 0);
@@ -75,6 +88,8 @@ export function ChallengeClient() {
   const handlePersonaSelect = (persona: Persona) => {
     setSelectedPersona(persona);
     setLastResult(null);
+    // Let the useEffect handle challenge selection
+    setCurrentChallenge(null); 
   };
 
   const handleSurpriseMe = () => {
@@ -110,14 +125,10 @@ export function ChallengeClient() {
           score: result.data.overallScore,
         };
         
-        const existingSubmissionIndex = submittedPrompts.findIndex(p => p.personaId === newSubmission.personaId && p.challengeId === newSubmission.challengeId);
-        if (existingSubmissionIndex > -1) {
-          const updatedPrompts = [...submittedPrompts];
-          updatedPrompts[existingSubmissionIndex] = newSubmission;
-          setSubmittedPrompts(updatedPrompts);
-        } else {
-          setSubmittedPrompts([...submittedPrompts, newSubmission]);
-        }
+        // Add to submitted prompts, replacing if it's a retry
+        const updatedPrompts = submittedPrompts.filter(p => p.challengeId !== newSubmission.challengeId || p.personaId !== newSubmission.personaId);
+        updatedPrompts.push(newSubmission);
+        setSubmittedPrompts(updatedPrompts);
         
         toast({
           title: "Prompt Scored!",
@@ -144,6 +155,7 @@ export function ChallengeClient() {
   const navigateToNextChallenge = () => {
     setLastResult(null);
     form.reset();
+    selectNextChallenge();
   };
   
   useEffect(() => {
@@ -153,14 +165,16 @@ export function ChallengeClient() {
   const handleAnotherChallenge = () => {
     setSelectedPersona(null);
     setLastResult(null);
+    setCurrentChallenge(null);
   }
   
   const handleLogout = () => {
+    // We keep submittedPrompts to track progress, but clear session-specific items
     localStorage.removeItem("screenName");
     localStorage.removeItem("privacyAgreed");
     localStorage.removeItem("selectedPersona");
-    localStorage.removeItem("submittedPrompts");
     localStorage.removeItem("userId");
+    localStorage.removeItem("currentChallenge");
     router.replace('/');
   }
 
