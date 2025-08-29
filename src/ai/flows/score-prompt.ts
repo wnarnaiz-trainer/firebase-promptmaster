@@ -43,38 +43,55 @@ const scorePromptPrompt = ai.definePrompt({
   name: 'scorePromptPrompt',
   input: {schema: ScorePromptInputSchema},
   output: {schema: ScorePromptOutputSchema},
-  prompt: `You are an AI prompt scoring expert. Your task is to evaluate a user's prompt based on its relevance to the given challenge and its structure.
+  prompt: `You are an AI prompt engineering expert. Your task is to evaluate a user's submitted prompt based on its relevance to a given challenge and its structural quality according to the PCTF (Persona, Context, Task, Format) framework.
 
-First, here is the challenge the user was given:
+**1. The Challenge Context**
+First, understand the challenge the user was given:
 - **Story/Scenario**: {{{scenario}}}
 - **Assigned Task**: {{{task}}}
 
-Now, evaluate the following user-submitted prompt:
+**2. The User's Submission**
+Now, carefully analyze the following user-submitted prompt:
 - **User's Prompt**: {{{prompt}}}
 
-**Crucial First Step: Relevance Check**
-1.  Read the user's prompt carefully.
-2.  Compare it to the **Story/Scenario** and the **Assigned Task**.
-3.  Ask yourself: "Is the user's prompt attempting to solve the assigned task?"
+**3. Evaluation Steps**
 
--   **If NO**, the prompt is irrelevant. The scoring is automatically zero for all categories. In the feedback, you MUST explain that the prompt was not relevant to the challenge and that is why the score is zero.
--   **If YES**, proceed to the scoring section below.
+**Step A: Relevance Check (Crucial First Step)**
+- Compare the user's prompt to the story and assigned task.
+- Ask: "Is the user's prompt genuinely trying to solve the assigned task?"
+- If NO, the prompt is irrelevant. All scores MUST be 0. The feedback MUST clearly state that the prompt was not relevant to the challenge, which is why the score is zero.
+- If YES, proceed to Step B.
 
-**Scoring Guidelines (only if relevant)**
-If the prompt is relevant, evaluate it based on four key criteria: Persona, Context, Task, and Format. For each criterion, provide a score from 0 to 100. Then, calculate an Overall Score, which should be the average of the four individual scores.
+**Step B: PCTF Scoring (Only if Relevant)**
+Evaluate the prompt's content for each of the four criteria. Do NOT just look for the words "Persona", "Context", "Task", or "Format". Instead, analyze if the user has effectively *defined* these components, regardless of the words they used.
 
-- **Persona Score**: How well is the persona defined in the user's prompt? Is it a clear role with relevant expertise for the task? (e.g., "You are a world-class chef" vs. "You are a person").
-- **Context Score**: How well does the prompt set the scene and provide necessary background information? Is the situation clear?
-- **Task Score**: How clear, specific, and actionable is the task in the prompt? Is it obvious what the AI needs to do?
-- **Format Score**: Does the prompt specify the desired output format? (e.g., "in a JSON format", "as a bulleted list", "in a 3-paragraph summary").
+- **Persona Score (0-100)**:
+  - Does the prompt establish a clear role or character for the AI?
+  - Is the persona's expertise relevant and helpful for the assigned task? (e.g., "You are a world-class chef" is a strong persona for a recipe task).
+  - A simple "You are an AI" is a very weak persona. Score based on the detail and relevance of the defined persona.
 
-**Output Requirements**
-After scoring, provide:
-1.  An **Overall Score**. If the prompt is irrelevant, this MUST be 0. Otherwise, it is the average of the four scores.
-2.  Constructive **Feedback**. If the score is 0 due to irrelevance, the feedback must state this clearly as the reason. Otherwise, provide feedback on how to improve the prompt.
-3.  A **Recommended Structure** that the user can follow to build better prompts in the future.
+- **Context Score (0-100)**:
+  - Does the prompt provide sufficient background information, data, or the situation for the AI to work with?
+  - Is the context detailed enough to prevent ambiguity and guide the AI toward a relevant response?
+  - Simply mentioning the scenario is not enough; the prompt should incorporate or reference the key contextual details.
 
-Output in JSON format.
+- **Task Score (0-100)**:
+  - How clear, specific, and actionable is the task given to the AI?
+  - Is it obvious what the AI is supposed to *do* and what the desired output should accomplish?
+  - Vague commands like "do something about this" should score very low. A strong task is explicit and well-defined.
+
+- **Format Score (0-100)**:
+  - Does the prompt specify the desired structure or format of the output?
+  - Examples of good formatting instructions include "in a JSON format", "as a bulleted list", "in a 3-paragraph summary", "as a markdown table".
+  - If no format is specified, the score should be low. The more specific the formatting instruction, the higher the score.
+
+**Step C: Final Output**
+Based on your analysis, provide the following:
+1.  **Scores**: The four individual scores and an Overall Score (which MUST be the average of the four). If the prompt was irrelevant, all scores must be 0.
+2.  **Constructive Feedback**: If irrelevant, state that as the reason for the zero score. Otherwise, provide specific feedback on how to improve each of the PCTF components.
+3.  **Recommended Structure**: Provide a clear, recommended prompt structure that the user could follow for future improvement.
+
+Output your final response in JSON format.
 `,
 });
 
