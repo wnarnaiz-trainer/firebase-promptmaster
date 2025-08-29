@@ -1,4 +1,4 @@
-import { Megaphone, Code2, Feather, ScrollText, Users, Briefcase, BarChart2, Lightbulb, Shield } from 'lucide-react';
+import { Megaphone, Code2, Feather, ScrollText, Users, Briefcase, BarChart2, Lightbulb, Shield, GraduationCap } from 'lucide-react';
 import type { Persona, Challenge } from './types';
 
 export const personas: Persona[] = [
@@ -55,6 +55,12 @@ export const personas: Persona[] = [
     name: 'Cybersecurity Expert',
     description: 'Identify threats and create security policies.',
     icon: Shield,
+  },
+  {
+    id: 'learning-development',
+    name: 'Learning & Development',
+    description: 'Design training programs and create learning materials.',
+    icon: GraduationCap,
   },
 ];
 
@@ -715,5 +721,78 @@ export const challenges: Challenge[] = [
     challengeId: 12,
     title: 'Your task is to craft a prompt that classifies potential security events based on their severity.',
     scenario: 'You are monitoring a security information and event management (SIEM) system which is generating thousands of alerts. You need a way to quickly classify them. Your prompt should provide examples of three different security events (e.g., "1. A user had 5 failed login attempts." "2. Malware was detected and quarantined on a single laptop." "3. Unusual data exfiltration detected from a database server.") and ask the AI to classify each event as Low, Medium, or High severity and provide a brief justification.',
+  },
+  // Learning & Development Challenges
+  {
+    personaId: 'learning-development',
+    challengeId: 1,
+    title: 'Your task is to craft a prompt to generate an outline for a training module on "Effective Communication for Managers."',
+    scenario: 'Your company has noticed that new managers are struggling with giving feedback and leading team meetings. You need to develop a new training workshop. Your prompt should ask the AI to create a detailed training module outline, including learning objectives, key topics (e.g., Active Listening, Giving Constructive Feedback, Non-Verbal Communication), and suggestions for interactive activities.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 2,
+    title: 'Your task is to craft a prompt to write a short, engaging script for an e-learning video about company values.',
+    scenario: 'All new hires must complete an e-learning course on the company\'s core values (Innovation, Teamwork, Customer-Centricity). You need to create a script for a 2-minute animated video that makes this topic interesting. Your prompt should ask the AI to write a voiceover script that explains each value with a short, relatable story or example.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 3,
+    title: 'Your task is to craft a prompt to generate a 30-day onboarding plan for a new remote sales representative.',
+    scenario: 'A new sales representative is starting remotely next week. You need a structured onboarding plan to get them up to speed quickly. Your prompt should ask the AI to generate a 30-day plan in a weekly format, including key activities like product training, introductions to key team members, CRM software training, and their first sales call shadow.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 4,
+    title: 'Your task is to craft a prompt to create a one-page "Quick Reference Guide" for a new software tool being rolled out.',
+    scenario: 'The company is rolling out a new project management software. To help employees adopt it, you want to create a simple, one-page guide that covers the most essential functions. Your prompt should ask the AI to generate content for this guide, including screenshots placeholders, and clear, step-by-step instructions for tasks like "How to Create a New Task," "How to Assign a Task," and "How to Mark a Task as Complete."',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 5,
+    title: 'Your task is to craft a prompt to generate a series of quiz questions for a compliance training.',
+    scenario: 'All employees must complete an annual data privacy and security compliance training. To ensure they understood the material, you need to create a 10-question quiz. Your prompt should ask the AI to generate a multiple-choice quiz based on topics like identifying phishing, creating strong passwords, and handling sensitive customer data.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 6,
+    title: 'Your task is to craft a prompt to write an email inviting employees to an optional lunch-and-learn session.',
+    scenario: 'You are hosting an optional workshop on "Time Management and Productivity Tools" next month. You need to send an email to all employees that encourages them to sign up. Your prompt should ask the AI to write a persuasive and informative email that highlights the benefits of attending, provides the date and time, and includes a clear call-to-action to register.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 7,
+    title: 'Your task is to craft a prompt to generate a role-playing scenario for a customer service training.',
+    scenario: 'You are training new customer service agents on how to handle difficult customers. You need a realistic role-playing scenario for them to practice. Your prompt should ask the AI to write a scenario where a customer is angry because their shipment is late. The scenario should include the customer\'s script and provide notes for the trainer on what skills the agent should demonstrate (e.g., empathy, de-escalation, problem-solving).',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 8,
+    title: 'Your task is to craft a prompt to create a feedback form to measure the effectiveness of a training session.',
+    scenario: 'After every training session, you need to collect feedback from attendees to improve future workshops. Your prompt should ask the AI to create a short feedback survey with questions that assess the quality of the content, the effectiveness of the instructor, and whether the attendees feel they can apply what they learned to their jobs. Use a mix of rating scales and open-ended questions.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 9,
+    title: 'Your task is to craft a prompt to rewrite dense, technical documentation into a simple, easy-to-understand job aid.',
+    scenario: 'The IT department has produced a 50-page technical manual for the company\'s new VPN. No one will read it. You need to extract the most critical information and turn it into a simple job aid for non-technical employees. Your prompt should ask the AI to summarize the key steps for installing and connecting to the VPN into a bulleted list with simple, clear language.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 10,
+    title: 'Your task is to craft a prompt to brainstorm a list of topics for a leadership development program.',
+    scenario: 'You are designing a new year-long leadership development program for high-potential employees. You need to decide on the monthly training topics. Your prompt should ask the AI to brainstorm a list of 12 relevant topics, one for each month, covering areas like strategic thinking, coaching and mentoring, financial acumen, and change management.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 11,
+    title: 'Your task is to craft a prompt to generate a "how-to" guide for a peer-to-peer mentorship program.',
+    scenario: 'The company is launching a new mentorship program. You need to create a simple guide for both mentors and mentees to help them get started. Your prompt should ask the AI to create a guide that outlines the program goals, provides a template for setting initial goals, and offers conversation starters for their first meeting.',
+  },
+  {
+    personaId: 'learning-development',
+    challengeId: 12,
+    title: 'Your task is to craft a prompt to convert a list of learning objectives into a compelling course description.',
+    scenario: 'You have a list of learning objectives for a new course on "Project Management Fundamentals." You need to write a compelling course description for the company\'s learning portal to convince employees to sign up. Your prompt should provide the dry learning objectives and ask the AI to transform them into a benefit-oriented and engaging paragraph that describes what employees will learn and how it will help their careers.',
   },
 ];
