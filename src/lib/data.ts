@@ -2,12 +2,6 @@ import {
   Megaphone, 
   Code2, 
   Feather, 
-  ScrollText, 
-  Users, 
-  Briefcase, 
-  BarChart2, 
-  Lightbulb, 
-  Shield, 
   GraduationCap,
   Truck,
   Factory,
@@ -110,6 +104,12 @@ export const challenges: Challenge[] = [
     title: 'Develop a character profile and opening scene for a cyberpunk noir novel.',
     scenario: "In the rain-slicked neon streets of Neo-Manila, year 2088, the line between human and machine is blurred. Your protagonist, Elias 'Viper' Santos, is a former corporate enforcer turned private investigator who specializes in 'ghost-hacking'—retrieving memories from corrupted neural implants. Elias has a cybernetic eye that sees 'data leaks' but causes chronic migraines. He lives in a cramped apartment above a noodle shop. You need to create a prompt that generates a deep psychological profile for Elias and a gripping opening scene where he receives a mysterious, untraceable 'ghost-call' that mentions his missing sister.",
   },
+  {
+    personaId: 'creative-writer',
+    challengeId: 2,
+    title: 'Write a short story opening about a clockmaker who discovers a watch that stops time.',
+    scenario: "Master Alistair has spent fifty years in a dusty shop in Geneva, surrounded by the rhythmic ticking of thousands of timepieces. One rainy Tuesday, an elderly woman brings in a pocket watch that doesn't tick, but hums. When Alistair opens the casing, he realizes it doesn't measure time—it controls it. As he presses a small hidden lever, the rain outside the window freezes mid-air. You need to craft a prompt that sets the atmosphere of the shop, describes the physical sensation of time stopping, and ends with Alistair making a choice about whether to use this power to fix a mistake from his own past.",
+  },
 
   // Learning & Development Challenges
   {
@@ -157,7 +157,7 @@ export const challenges: Challenge[] = [
   {
     personaId: 'sales-pro',
     challengeId: 1,
-    title: 'Create a cold outreach prompt for a "whale" client in the tech sector.',
+    title: "Create a cold outreach prompt for a \"whale\" client in the tech sector.",
     scenario: "You are targeting the CTO of 'Nebula Cloud Systems,' a massive enterprise that currently uses your primary competitor for their edge computing needs. You know through industry reports that they are suffering from significant data latency issues in their European markets, affecting their stock price. You have exactly one shot at an introductory email. The prompt should generate a message that avoids a generic sales pitch, focuses entirely on the specific latency pain point, and proposes a 10-minute 'no-pressure' executive summary of how your architecture solved a similar issue for another global firm with measurable results.",
   },
   {
