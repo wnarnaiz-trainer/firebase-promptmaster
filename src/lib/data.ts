@@ -191,7 +191,7 @@ export const challenges: Challenge[] = [
   {
     personaId: 'sales-pro',
     challengeId: 1,
-    title: 'Create a cold outreach prompt for a 'whale' client in the tech sector.',
+    title: "Create a cold outreach prompt for a 'whale' client in the tech sector.",
     scenario: "You have one shot at a meeting with a Fortune 500 CTO. The prompt should generate a message that focuses on their specific pain point: data latency.",
   },
   {
