@@ -7,7 +7,13 @@ import {
   Factory,
   TrendingUp,
   Wallet,
-  Settings
+  Settings,
+  Library,
+  Users,
+  Briefcase,
+  LineChart,
+  Lightbulb,
+  ShieldCheck
 } from 'lucide-react';
 import type { Persona, Challenge } from './types';
 
@@ -29,6 +35,42 @@ export const personas: Persona[] = [
     name: 'Creative Writer',
     description: 'Weave enchanting stories and characters.',
     icon: Feather,
+  },
+  {
+    id: 'historian',
+    name: 'Historian',
+    description: 'Analyze past events and uncover hidden truths.',
+    icon: Library,
+  },
+  {
+    id: 'hr-manager',
+    name: 'HR Manager',
+    description: 'Write job descriptions and manage employee relations.',
+    icon: Users,
+  },
+  {
+    id: 'project-manager',
+    name: 'Project Manager',
+    description: 'Plan projects, create timelines, and assign tasks.',
+    icon: Briefcase,
+  },
+  {
+    id: 'data-analyst',
+    name: 'Data Analyst',
+    description: 'Interpret data, identify trends, and create reports.',
+    icon: LineChart,
+  },
+  {
+    id: 'business-analyst',
+    name: 'Business Analyst',
+    description: 'Analyze processes and recommend improvements.',
+    icon: Lightbulb,
+  },
+  {
+    id: 'cybersecurity-expert',
+    name: 'Cybersecurity Expert',
+    description: 'Identify threats and create security policies.',
+    icon: ShieldCheck,
   },
   {
     id: 'learning-development',
@@ -74,7 +116,7 @@ export const challenges: Challenge[] = [
     personaId: 'marketing-guru',
     challengeId: 1,
     title: 'Craft a prompt for a catchy tagline and ad copy for a new eco-friendly water bottle.',
-    scenario: "AquaPure is launching 'EarthBottle,' a revolutionary water bottle made entirely from corn-starch based bioplastics that are 100% home-compostable. The brand's mission is to eliminate single-use plastic in urban environments. You are targeting environmentally conscious Gen Z and Millennials on platforms like TikTok and Instagram. Your budget for the initial launch is tight, so the copy needs to be punchy, highly shareable, and clearly communicate the unique value of 'vanishing' after use without sacrificing durability during use. You need to consider the tone of voice which should be optimistic, slightly rebellious against 'big plastic', and deeply authentic.",
+    scenario: "AquaPure is launching 'EarthBottle,' a revolutionary water bottle made entirely from corn-starch based bioplastics that are 100% home-compostable. The brand's mission is to eliminate single-use plastic in urban environments. You are targeting environmentally conscious Gen Z and Millennials on platforms like TikTok and Instagram. Your budget for the initial launch is tight, so the copy needs to be punchy, highly shareable, and clearly communicate the unique value of 'vanishing' after use without sacrificing durability during use. You need to consider the tone of voice which should be optimistic, slightly rebellious against 'big plastic', and deeply authentic. How would you prompt an AI to generate three distinct taglines and a 15-second script for a video ad?",
   },
   {
     personaId: 'marketing-guru',
@@ -109,6 +151,90 @@ export const challenges: Challenge[] = [
     challengeId: 2,
     title: 'Write a short story opening about a clockmaker who discovers a watch that stops time.',
     scenario: "Master Alistair has spent fifty years in a dusty shop in Geneva, surrounded by the rhythmic ticking of thousands of timepieces. One rainy Tuesday, an elderly woman brings in a pocket watch that doesn't tick, but hums. When Alistair opens the casing, he realizes it doesn't measure time—it controls it. As he presses a small hidden lever, the rain outside the window freezes mid-air. You need to craft a prompt that sets the atmosphere of the shop, describes the physical sensation of time stopping, and ends with Alistair making a choice about whether to use this power to fix a mistake from his own past.",
+  },
+
+  // Historian Challenges
+  {
+    personaId: 'historian',
+    challengeId: 1,
+    title: 'Analyze the impact of the Silk Road on cultural exchange between East and West.',
+    scenario: "You are preparing a lecture for university students about the unintended consequences of trade. Focus specifically on the Tang Dynasty in China and the Byzantine Empire. You need to analyze how the Silk Road was not just a route for silk and spices, but a highway for religious ideas (like Nestorian Christianity and Buddhism), musical instruments, and even agricultural techniques. Your prompt should ask the AI to synthesize these varied cultural threads into a coherent argument about how trade creates a 'globalized' world long before the modern era, citing specific artifacts or historical records as evidence.",
+  },
+  {
+    personaId: 'historian',
+    challengeId: 2,
+    title: 'Debunk common myths about the Victorian Era using primary source evidence.',
+    scenario: "Modern pop culture often portrays the Victorian era as purely repressed, gray, and humorless. You are writing an article for a history magazine that challenges this 'Master Narrative.' You want to focus on the vibrant underground cultures, the obsession with spiritualism and the macabre, and the radical scientific breakthroughs of the time. Your prompt should guide the AI to use specific primary source examples—like diary entries from the working class or satirical cartoons from 'Punch' magazine—to show a more complex, colorful, and often contradictory side of 19th-century life.",
+  },
+
+  // HR Manager Challenges
+  {
+    personaId: 'hr-manager',
+    challengeId: 1,
+    title: 'Draft a modern, inclusive job description for a Senior UX Researcher.',
+    scenario: "Your company, 'FlowState Apps,' is known for its diverse and neurodivergent-friendly workplace. You are hiring a Senior UX Researcher who will lead accessibility initiatives. The traditional 'years of experience' and 'degree required' metrics are less important to you than empathy, analytical rigor, and a proven track record of inclusive design. You need a prompt that generates a job description that avoids gendered language, clearly outlines the company's commitment to remote flexibility, and emphasizes 'skills-based' requirements over traditional credentials.",
+  },
+  {
+    personaId: 'hr-manager',
+    challengeId: 2,
+    title: 'Develop a framework for conducting difficult performance reviews.',
+    scenario: "A long-term employee, Sarah, has seen her productivity dip significantly over the last two quarters. She was previously a top performer, but recent team feedback suggests she is becoming a bottleneck due to communication delays. You suspect burnout or personal issues but need to maintain professional standards. You need a prompt that helps you draft a 'Scripted Conversation' for a performance review. This script must use 'radical candor'—being direct and clear about the issues while showing deep personal care for Sarah's well-being and offering a path toward support and improvement.",
+  },
+
+  // Project Manager Challenges
+  {
+    personaId: 'project-manager',
+    challengeId: 1,
+    title: 'Create a risk mitigation plan for a large-scale data migration project.',
+    scenario: "Your team is migrating 500 terabytes of legacy customer data from an on-premise server to a multi-cloud environment. The deadline is fixed for 6 months from now. Key risks include data corruption during transit, API incompatibilities with the new cloud provider, and potential downtime for the customer-facing portal. You need a prompt that generates a comprehensive Risk Register. This register should categorize risks, assign probability and impact scores, and provide specific mitigation strategies for the 'High' and 'Critical' items, including a rollback plan in case of catastrophic failure.",
+  },
+  {
+    personaId: 'project-manager',
+    challengeId: 2,
+    title: 'Generate a project timeline and resource allocation for a new product launch.',
+    scenario: "You are launching 'SmartSprout,' an automated indoor herb garden kit. The project involves hardware manufacturing, mobile app development, and a coordinated marketing campaign. You have a team of 12 people (3 developers, 2 designers, 1 product manager, 4 marketing specialists, and 2 hardware engineers). You need a prompt that creates a high-level Gantt chart (in text format) for a 12-week sprint to launch. It should identify critical paths, account for lead times in hardware components, and show how you will balance the workload to avoid developer burnout during the final integration phase.",
+  },
+
+  // Data Analyst Challenges
+  {
+    personaId: 'data-analyst',
+    challengeId: 1,
+    title: 'Write a SQL query and interpret results for a customer churn analysis.',
+    scenario: "Your e-commerce platform has noticed a 5% increase in churn among 'Gold' tier members in the Southeast Asia region over the last 90 days. You have access to three tables: `Users`, `Orders`, and `Support_Tickets`. You need a prompt that generates a SQL query to join these tables and identify correlation between high support ticket frequency and churn. Furthermore, the prompt should ask the AI to provide a 3-paragraph summary interpreting the hypothetical results, focusing on identifying the 'tipping point' where a customer decides to leave.",
+  },
+  {
+    personaId: 'data-analyst',
+    challengeId: 2,
+    title: 'Create a Python script for cleaning and visualizing a messy dataset.',
+    scenario: "You've been handed a CSV file containing 50,000 rows of global temperature data from various sensors. The data is messy: some columns have 'NaN' values, some dates are in 'MM/DD/YYYY' and others in 'DD-MM-YYYY', and there are clearly outlier spikes caused by sensor malfunctions. You need a prompt that generates a Python script using `pandas` and `matplotlib`. The script should clean the data (handle missing values, normalize dates, filter outliers) and then create a line chart showing the 12-month rolling average temperature, with a shaded area representing the variance.",
+  },
+
+  // Business Analyst Challenges
+  {
+    personaId: 'business-analyst',
+    challengeId: 1,
+    title: 'Conduct a SWOT analysis for a brick-and-mortar retail store entering e-commerce.',
+    scenario: "'Vintage Vibes' is a successful local record store that wants to start selling globally online. They have a massive inventory of rare vinyl but zero digital presence. Their strengths are their deep niche knowledge and community reputation. Their weaknesses are a lack of technical infrastructure and shipping experience. Opportunities include the global 'vinyl revival' trend, while threats include giant marketplaces like Discogs and Amazon. You need a prompt that generates a detailed SWOT analysis and proposes three strategic 'must-do' actions to leverage their strengths while mitigating the technical threats.",
+  },
+  {
+    personaId: 'business-analyst',
+    challengeId: 2,
+    title: 'Draft a process improvement plan for a bottlenecked manufacturing line.',
+    scenario: "The packaging station at a local toy factory is consistently the bottleneck, causing finished toys to pile up and delay shipping. Currently, the station is manual, with three workers handling assembly, boxing, and labeling. You've observed that the labeling step takes twice as long as boxing due to a malfunctioning printer. You need a prompt that helps you analyze this process using 'Lean Six Sigma' principles. The output should be a proposal for a redesigned workflow, including a cost-benefit analysis of purchasing an automated labeling machine versus hiring a fourth temporary worker.",
+  },
+
+  // Cybersecurity Expert Challenges
+  {
+    personaId: 'cybersecurity-expert',
+    challengeId: 1,
+    title: 'Draft an incident response plan for a suspected ransomware attack.',
+    scenario: "At 3:00 AM on a Sunday, your automated monitoring system detects unusual encryption activity on your main file server. Several critical databases have become inaccessible, and a '.txt' file titled 'READ_FOR_DECRYPTION' has appeared. You are the CISO. You need a prompt that generates an immediate 4-hour Incident Response Plan. This plan must include isolation steps, communication protocols for stakeholders and law enforcement, and a strategy for verifying the integrity of your offline backups before attempting a restore.",
+  },
+  {
+    personaId: 'cybersecurity-expert',
+    challengeId: 2,
+    title: 'Create a security awareness training module for employees on phishing.',
+    scenario: "Recent internal audits show that 15% of employees at your financial services firm still click on 'simulated' phishing links, particularly those that appear to come from internal IT or HR. You need to create a 10-slide training module that is engaging and non-punitive. Your prompt should guide the AI to generate content that teaches 'The Anatomy of a Phish'—showing specific red flags in headers, URLs, and tone of voice. It should also include a 'What to do next' checklist if an employee realizes they've accidentally clicked a suspicious link.",
   },
 
   // Learning & Development Challenges
